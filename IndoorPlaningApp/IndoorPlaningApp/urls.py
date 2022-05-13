@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', IndoorApp.views.home, name='home'),
     path('', IndoorApp.views.home, name='home'),
+    path('currentLocation/', IndoorApp.views.CurrentLocation.as_view(), name='home'),
 ]
