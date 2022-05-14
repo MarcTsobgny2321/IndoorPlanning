@@ -15,8 +15,8 @@ def getColoms(dataset,coloms):
 def init():   
         
     dataset=loadXlxsFile('/home/marc/DEV/IndoorPlaning/IndoorPlaningApp/utilities/sites.xlsx')
-    coloms=['Longitude','Latitude']
-    LatLng=getColoms(dataset=dataset,coloms=coloms).head().values.tolist()
+    coloms=['Longitude','Latitude','CI']
+    LatLng=getColoms(dataset=dataset,coloms=coloms).head(30).values.tolist()
     return LatLng   
 
 
