@@ -68,6 +68,8 @@
                             <input id='lat' style="width: 20%; " class="form-control me-2" type="search" name="currentLoc" required placeholder="Latitude" aria-label="Latitude">
                             <input id='lng' style="width: 20%; " class="form-control me-2" type="search" name="currentLoc" required placeholder="Longitude" aria-label="Logitude">
                             <button class="btn btn-outline-success" type="button" onclick="searchLoc()">Search</button>
+                            <button class="btn btn-outline-warning" type="button" onclick="">PlaceM</button>
+                            
                         </form>
                     </div>
                 </div>
@@ -108,6 +110,8 @@
     <h1>My First Google Map</h1>
     <div id="actionPanel">
         Mon pannel d'actions
+        <p>
+        </p>
     </div>
     <div id="googleMap"></div>
 
@@ -131,4 +135,18 @@
 <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd7e5r79oLPfBkixZYYsbgZhld1gDAaoM&callback=myMap"></script>
 
+           
+<script src="{% static 'postMap.js' %}"></script>
+                <script>
+                
+             {% for ll in LatLng %}
+
+             var llj={{ll}};
+             //console.log('Mon paramettre : '+ llj);
+            placeMaker2(llj);
+            
+                //al();
+            {% endfor %} 
+            </script> 
+            
 </html>
