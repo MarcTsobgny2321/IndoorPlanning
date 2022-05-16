@@ -197,12 +197,15 @@ function searchLoc() {
 }
 
 
-function placeMarkerT(map, location, CI) {
+function placeMarkerT(map, location, CI, Az) {
   const icon = {
     url: "https://www.svgrepo.com/show/106230/antenna.svg",
+    // url :"https://www.svgrepo.com/show/371524/signal.svg",
     scaledSize: new google.maps.Size(30, 30), // scaled size
     origin: new google.maps.Point(0, 0), // origin
-    anchor: new google.maps.Point(0, 0) // anchor
+    anchor: new google.maps.Point(0, 0), // anchor
+    // rotation : Az
+
   };
 
   var marker = new google.maps.Marker({
@@ -215,8 +218,10 @@ function placeMarkerT(map, location, CI) {
     content:
       'CI : ' + CI
       + '<br>Latitude: ' + location.lat() +
-      '<br>Longitude: ' + location.lng()
+      '<br>Longitude: ' + location.lng()+
+      '<br> Azimuth : ' + Az
   });
+
   
   google.maps.event.addListener(marker, 'click', function () {
     infowindow.open(map, marker);
@@ -236,5 +241,5 @@ function searchLoc() {
 
 function placeMaker2(latlng) {
   // console.log('type of latlng parameters :'+typeof(latlng));
-  placeMarkerT(map, new google.maps.LatLng(parseFloat(latlng[1]), parseFloat(latlng[0])), parseFloat(latlng[2]));
+  placeMarkerT(map, new google.maps.LatLng(parseFloat(latlng[1]), parseFloat(latlng[0])), latlng[2],parseFloat(latlng[3]));
 }

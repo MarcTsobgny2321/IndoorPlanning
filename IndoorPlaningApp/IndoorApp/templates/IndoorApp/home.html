@@ -133,16 +133,29 @@
 
 <script src="{% static 'map.js' %}"></script>
 <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd7e5r79oLPfBkixZYYsbgZhld1gDAaoM&callback=myMap"></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd7e5r79oLPfBkixZYYsbgZhld1gDAaoM&callback=myMap"
+    
+    >
+    
+    </script>
 
            
 <script src="{% static 'postMap.js' %}"></script>
                 <script>
-                
+                let llj=[];
              {% for ll in LatLng %}
+             //long
+                llj[0]= parseFloat({{ll.0}});
+                //lat
+                llj[1]=parseFloat({{ll.1}});
+                //SiteCode
+                llj[2]="{{ll.2}}";
+                
+                // Azimuth
+              llj[3]={{ll.3}};
+              
 
-             var llj={{ll}};
-             //console.log('Mon paramettre : '+ llj);
+         //    console.log('Mon paramettre : '+ llj);
             placeMaker2(llj);
             
                 //al();
