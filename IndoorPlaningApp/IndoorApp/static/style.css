@@ -20,3 +20,14 @@ body {
     padding: 5px 5px 5px 5px;
     float: right;
 }
+
+.loader {
+    position : fixed;
+    z-index: 9999;
+    background : url('loader.svg') 50% 50% no-repeat;
+    top : 0px;
+    left : 0px;
+    height : 100%;
+    width : 100%;
+    /* cursor : wait; */
+    }

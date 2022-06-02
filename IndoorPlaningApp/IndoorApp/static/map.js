@@ -198,15 +198,39 @@ function searchLoc() {
 
 
 function placeMarkerT(map, location, CI, Az) {
+
+
+  
+
   const icon = {
-    url: "https://www.svgrepo.com/show/106230/antenna.svg",
+    //  url: "https://www.svgrepo.com/show/106230/antenna.svg",
     // url :"https://www.svgrepo.com/show/371524/signal.svg",
-    scaledSize: new google.maps.Size(30, 30), // scaled size
-    origin: new google.maps.Point(0, 0), // origin
-    anchor: new google.maps.Point(0, 0), // anchor
+    // path :' M15.384 6.115a.485.485 0 0 0-.047-.736A12.444 12.444 0 0 0 8 3C5.259 3 2.723 3.882.663 5.379a.485.485 0 0 0-.048.736.518.518 0 0 0 .668.05A11.448 11.448 0 0 1 8 4c2.507 0 4.827.802 6.716 2.164.205.148.49.13.668-.049z',
+    // path :'M13.229 8.271a.482.482 0 0 0-.063-.745A9.455 9.455 0 0 0 8 6c-1.905 0-3.68.56-5.166 1.526a.48.48 0 0 0-.063.745.525.525 0 0 0 .652.065A8.46 8.46 0 0 1 8 7a8.46 8.46 0 0 1 4.576 1.336c.206.132.48.108.653-.065zm-2.183 2.183c.226-.226.185-.605-.1-.75A6.473 6.473 0 0 0 8 9c-1.06 0-2.062.254-2.946.704-.285.145-.326.524-.1.75l.015.015c.16.16.407.19.611.09A5.478 5.478 0 0 1 8 10c.868 0 1.69.201 2.42.56.203.1.45.07.61-.091l.016-.015zM9.06 12.44c.196-.196.198-.52-.04-.66A1.99 1.99 0 0 0 8 11.5a1.99 1.99 0 0 0-1.02.28c-.238.14-.236.464-.04.66l.706.706a.5.5 0 0 0 .707 0l.707-.707z',
+   
+    // path:'M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z',
+    //  path: "M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z",
+   
+    // scaledSize: new google.maps.Size(30, 30), // scaled size
+    // origin: new google.maps.Point(0, 0), // origin
+    // anchor: new google.maps.Point(0, 0), // anchor
     // rotation : Az
 
+
+    rotation: Az,
+     path: "M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z",
+    fillColor: "blue",
+    fillOpacity: 0.9,
+    strokeWeight: 0,
+    scale: 2,
+    anchor: new google.maps.Point(location.lat(), location.lng()),
+
   };
+
+  
+  var rotationAngle = Az;
+
+  
 
   var marker = new google.maps.Marker({
     position: location,
@@ -222,6 +246,22 @@ function placeMarkerT(map, location, CI, Az) {
       '<br> Azimuth : ' + Az
   });
 
+  marker.set
+  marker.setMap(map);
+
+  // var myCity = new google.maps.Circle({
+  //   center: location,
+  //   radius: 20000,
+  //   strokeColor: "#0000FF",
+  //   strokeOpacity: 0.8,
+  //   strokeWeight: 2,
+  //   fillColor: "#0000FF",
+  //   fillOpacity: 0.4
+  // });
+
+  // myCity.setMap(map);
+
+
   
   google.maps.event.addListener(marker, 'click', function () {
     infowindow.open(map, marker);
@@ -230,6 +270,51 @@ function placeMarkerT(map, location, CI, Az) {
   
   infowindow.open(map, marker);
 }
+
+
+
+
+function placeMarkerM(map, location, infosWinText) {
+
+
+  
+
+  const icon = {
+     url: "https://www.svgrepo.com/show/106230/antenna.svg",
+    fillColor: "blue",
+    fillOpacity: 0.9,
+    strokeWeight: 0,
+    scale: 4,
+    anchor: new google.maps.Point(location.lat(),location.lng()),
+    scaledSize: new google.maps.Size(30, 30), // scaled size
+    origin: new google.maps.Point(0, 0), // origin
+    // anchor: new google.maps.Point(0, 0), // anchor
+
+  };  
+
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map,
+    icon: icon
+  });
+
+  var infowindow = new google.maps.InfoWindow({
+    content:
+     '<br>Latitude: ' + location.lat() +
+      '<br>Longitude: ' + location.lng()+
+      '<br> infos : ' + infosWinText
+  });
+
+  marker.set
+  marker.setMap(map);
+  google.maps.event.addListener(marker, 'click', function () {
+    infowindow.open(map, marker);
+  });
+
+  
+  infowindow.open(map, marker);
+}
+
 
 
 function searchLoc() {
@@ -243,3 +328,85 @@ function placeMaker2(latlng) {
   // console.log('type of latlng parameters :'+typeof(latlng));
   placeMarkerT(map, new google.maps.LatLng(parseFloat(latlng[1]), parseFloat(latlng[0])), latlng[2],parseFloat(latlng[3]));
 }
+
+
+
+function placeMaker3(lat,lng,HTMLText,angle){
+  var tag=new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
+  placeMarkerM(map, tag,"Site Taged : <br>"+HTMLText);
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        }
+        var my=new google.maps.LatLng(parseFloat(pos.lat), parseFloat(pos.lng));
+        placeMarkerM(map, my,"My position <br> Angle: "+angle);
+        var myTrip = [tag, my];
+        var flightPath = new google.maps.Polyline({
+          path: myTrip,
+          strokeColor: "#0000FF",
+          strokeOpacity: 0.8,
+          strokeWeight: 2
+        });
+      
+        flightPath.setMap(map);
+     
+      },
+      () => {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }
+    );
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+map.setCenter(tag);
+map.setZoom(13);
+}
+
+
+
+
+function getCurrentLocation(){
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          infoWindow.setPosition(pos);
+          infoWindow.setContent('Location found.<br> lat : ' + pos.lat + '<br>long :' + pos.lng);
+          map.setZoom(18);
+          map.setCenter(pos);
+          var marker1 = new google.maps.Marker({
+            position: pos,
+          });
+
+          marker1.setMap(map);
+          infoWindow.open(map, marker1);
+          alert(position);
+
+        },
+        () => {
+          handleLocationError(true, infoWindow, map.getCenter());
+        }
+      );
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+
+
+}
+
+
+
+
+
+
+
+

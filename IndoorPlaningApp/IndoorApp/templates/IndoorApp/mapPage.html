@@ -1,0 +1,64 @@
+{% extends "IndoorApp/base.html" %}
+
+{% block actionPan %}
+<form method="post" action="{% url 'getCellInfos' %}">
+{% csrf_token %}
+
+    <div class="form-group">
+      <input type="number" class="form-control" name="latitude" id="latitude" placeholder="Latitude">
+      <input type="number" class="form-control" name="longitude" id="longitude" placeholder="Longitude">
+      <input type="number" class="form-control" name="siteID" id="siteID" placeholder="SiteID">
+      <input type="number" class="form-control" name="cellID" id="cellID" placeholder="CellID">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Select operator</label>
+      <select class="form-control" id="op" name="op">
+        <option value="OrangeCM">Orange CM</option>
+        <option value="MtnCM">Mtn CM</option>
+      </select>
+
+      <label for="exampleFormControlSelect1">Select network type</label>
+      <select class="form-control" id="network" name="network">
+        <option value="2G">2G</option>
+        <option value="3G">3G</option>
+        <option value="4G">4G</option>
+
+      </select>
+
+    </div>
+
+  <button type="submit" class="btn btn-warning mb-2">start</button>
+  </form>
+
+
+  {% endblock actionPan%}
+
+{% block content %}
+    <div id="googleMap" ></div>
+
+{% endblock content %}
+
+{% block mapScript %}
+
+{% load static %}
+<script src="{% static 'map.js' %}"></script>
+<script 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDd7e5r79oLPfBkixZYYsbgZhld1gDAaoM&callback=myMap"
+    
+    >
+     </script>
+
+
+<script>
+// var lat={{cellTag.0.21}};
+// var lng={{cellTag.0.20}};
+// var CID="{{cellTag.0.2}}";
+// var Az={{cellTag.0.22}}
+
+// var text= "CID : "+CID+" Azimuth : "+Az+"<br> Angle pour antenne :"
+var text= "Azimuth : "+{{Az}}+"<br> :"
+    placeMaker3({{lat}},{{lng}},text,{{angle}});
+</script>
+{% endblock mapScript %}
+    
+   
