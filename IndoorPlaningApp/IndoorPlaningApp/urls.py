@@ -26,4 +26,7 @@ urlpatterns = [
     path('currentLocation/', IndoorApp.views.CurrentLocation.as_view(), name='currentLocation'),
     path('login/',authentication.views.Login.as_view(), name='login'),
     path('logout/',authentication.views.logoout_user, name='logout'),
+    path('stopNetwork/',IndoorApp.views.stopNetwork, name='stopNetwork'),
+    
+    
 ]

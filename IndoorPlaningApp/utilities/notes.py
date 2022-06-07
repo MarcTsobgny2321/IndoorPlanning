@@ -23,6 +23,9 @@ class NetworkOperator:
         self.name = name
         self.networkType = networkType
         self.dataset = dataset
+        
+    def delete(self):
+        del self
 
 
 def init(operator, network):
