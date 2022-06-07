@@ -16,11 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 import IndoorApp.views
+import authentication.views
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('home/', IndoorApp.views.home, name='home'),
     path('mapPage/', IndoorApp.views.mapPage, name='mapPage'),
     path('mapPage/getCelInfos', IndoorApp.views.GetCellInfo.as_view(), name="getCellInfos"),
     path('', IndoorApp.views.home, name='home'),
     path('currentLocation/', IndoorApp.views.CurrentLocation.as_view(), name='currentLocation'),
+    path('login/',authentication.views.Login.as_view(), name='login'),
+    path('logout/',authentication.views.logoout_user, name='logout'),
 ]

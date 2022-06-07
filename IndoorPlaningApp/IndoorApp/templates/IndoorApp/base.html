@@ -79,6 +79,36 @@ $(".loader").fadeOut("1000"); })
                             <button class="btn btn-outline-warning" type="button" onclick="">PlaceM</button>
                             
                         </form>
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                         {% if request.user.is_superuser  %}
+                        <li class="nav-item ">
+                                <a class="nav-link " href="/admin">Admin workspace</a>
+                            </li>
+                        {% else %}
+                        {% endif %} 
+
+                        {%if user.is_authenticated %}
+
+
+                        <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="{% url 'mapPage' %}" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ request.user }}
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{% url 'logout'%} " id="startMap">Logout</a></li>
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    
+                                </ul>
+                            </li>
+                            {%else%}
+                            <li class="nav-item ">
+                                <a class="nav-link " href="{% url 'login'%} ">Login</a>
+                            </li>
+
+                          {% endif %}
+
+                        </ul>
                     </div>
                 </div>
             </nav>
@@ -90,15 +120,14 @@ $(".loader").fadeOut("1000"); })
         Button with data-bs-target
     </button> -->
 
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas show offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Actions</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <div>
-                Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images,
-                lists, etc.
+                Interract with arounded Site
             </div>
             <div class="dropdown mt-3">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -111,15 +140,21 @@ $(".loader").fadeOut("1000"); })
                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
             </div>
+
+            
+      
+   {% block actionPanC %}
+        
+   {% endblock actionPanC %}
         </div>
     </div>
 
-    <div id="actionPanel">
+    <!-- <div id="actionPanel">
       
    {% block actionPan %}
         
    {% endblock actionPan %}
-    </div>
+    </div> -->
     
    {% block content %}
         
@@ -146,11 +181,6 @@ $(".loader").fadeOut("1000"); })
     crossorigin="anonymous"></script>
 
 
-<script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
-  type="text/javascript" charset="utf-8"></script>
-<script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
-  type="text/javascript" charset="utf-8"></script>
-  
 
    {% block mapScript %}
         
