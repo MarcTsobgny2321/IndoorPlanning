@@ -24,6 +24,18 @@ class NetworkOperator:
         self.networkType = networkType
         self.dataset = dataset
         
+    def getCalledSiteName(self):
+        if self.name=="OrangeCM" :
+            if self.networkType =='4G' :
+                return 'New eNodeB Name'
+            elif self.networkType =='3G' :
+                return 'Site Name'
+            elif self.networkType =='2G' :
+                return 'BTSName'
+    
+    
+    
+        
     def delete(self):
         del self
 

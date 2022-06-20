@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path
 import IndoorApp.views
 import authentication.views
+from django.conf import settings #add this
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('home/', IndoorApp.views.home, name='home'),
@@ -27,6 +30,11 @@ urlpatterns = [
     path('login/',authentication.views.Login.as_view(), name='login'),
     path('logout/',authentication.views.logoout_user, name='logout'),
     path('stopNetwork/',IndoorApp.views.stopNetwork, name='stopNetwork'),
+    path('indoorMapPlanner/',IndoorApp.views.IndoorMapPlanner.as_view(), name='indoorMapPlanner'),
+    
+    path('indoorMapPlanner/uploadMap',IndoorApp.views.uploadMap, name='uploadMap'),
     
     
-]
+    
+    
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

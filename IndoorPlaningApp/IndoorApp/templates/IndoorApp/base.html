@@ -1,9 +1,9 @@
-
 {% comment %} <div class="loader"></div>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-$(window).load(function() {
-$(".loader").fadeOut("1000"); })
+    $(window).load(function () {
+        $(".loader").fadeOut("1000");
+    })
 </script> {% endcomment %}
 {% load static %}
 <html>
@@ -54,13 +54,15 @@ $(".loader").fadeOut("1000"); })
                                 <a class="nav-link" href="#">Go to atool</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="{% url 'mapPage' %}" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Add map
+                                <a class="nav-link dropdown-toggle" href="{% url 'mapPage' %}" id="navbarDropdown"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Planner
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{% url 'mapPage'%} " id="startMap">GoogleMap</a></li>
-                                    <li><a class="dropdown-item" href="#">Ohter Map...</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'mapPage'%} " id="startMap">Outdoor
+                                            Planner</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'indoorMapPlanner'%} ">Indoor Planner</a>
+                                    </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -71,47 +73,49 @@ $(".loader").fadeOut("1000"); })
                                 <a class="nav-link disabled">Disabled</a>
                             </li>
                         </ul>
-                        <form  class="d-flex">
-                            <input id='lat' style="width: 20%; " class="form-control me-2" type="search" name="currentLoc" required placeholder="Latitude" aria-label="Latitude">
-                            <input id='lng' style="width: 20%; " class="form-control me-2" type="search" name="currentLoc" required placeholder="Longitude" aria-label="Logitude">
-                            
+                        {% comment %} <form class="d-flex">
+                            <input id='lat' style="width: 20%; " class="form-control me-2" type="search"
+                                name="currentLoc" required placeholder="Latitude" aria-label="Latitude">
+                            <input id='lng' style="width: 20%; " class="form-control me-2" type="search"
+                                name="currentLoc" required placeholder="Longitude" aria-label="Logitude">
+
                             <button class="btn btn-outline-success" type="button" onclick="searchLoc()">Search</button>
                             <button class="btn btn-outline-warning" type="button" onclick="">PlaceM</button>
-                            
-                        </form>
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-                         {% if request.user.is_superuser  %}
-                        <li class="nav-item ">
+
+                        </form> {% endcomment %}
+                        <ul class="navbar-nav navbar-right   ">
+                            {% if request.user.is_superuser %}
+                            <li class="nav-item ">
                                 <a class="nav-link " href="/admin">Admin workspace</a>
                             </li>
-                        {% else %}
-                        {% endif %} 
+                            {% else %}
+                            {% endif %}
 
-                        {%if user.is_authenticated %}
+                            {%if user.is_authenticated %}
 
 
-                        <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="{% url 'mapPage' %}" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="{% url 'mapPage' %}" id="navbarDropdown"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ request.user }}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="{% url 'logout'%} " id="startMap">Logout</a></li>
                                     <li><a class="dropdown-item" href="#">Profile</a></li>
-                                    
+
                                 </ul>
                             </li>
                             {% if op %}
                             <li class="nav-item dropdown">
-                             <a class="nav-link dropdown-toggle text-danger" href="{% url 'mapPage' %}" id="op" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle text-danger" href="{% url 'mapPage' %}" id="op"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{op.name}} {{op.networkType}}
 
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="#" id="startMap">view</a></li>
                                     <li><a class="dropdown-item" href="{% url 'stopNetwork' %}">stop</a></li>
-                                    
+
                                 </ul>
                             </li>
                             {% else %}
@@ -121,13 +125,13 @@ $(".loader").fadeOut("1000"); })
                             </li>
 
                             {% endif %}
-                            
+
                             {%else%}
                             <li class="nav-item ">
                                 <a class="nav-link " href="{% url 'login'%} ">Login</a>
                             </li>
 
-                          {% endif %}
+                            {% endif %}
 
                         </ul>
                     </div>
@@ -141,7 +145,8 @@ $(".loader").fadeOut("1000"); })
         Button with data-bs-target
     </button> -->
 
-    <div class="offcanvas show offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas show offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasExample"
+        aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasExampleLabel">Actions</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -150,13 +155,13 @@ $(".loader").fadeOut("1000"); })
             <div>
                 Interract with arounded Site
             </div>
-            
 
-            
-      
-   {% block actionPanC %}
-        
-   {% endblock actionPanC %}
+
+
+
+            {% block actionPanC %}
+
+            {% endblock actionPanC %}
         </div>
     </div>
 
@@ -166,12 +171,73 @@ $(".loader").fadeOut("1000"); })
         
    {% endblock actionPan %}
     </div> -->
-    
-   {% block content %}
-        
-        {% endblock content %}
 
-    
+
+
+
+
+
+
+    <p>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#myconfig" role="button" aria-expanded="false"
+            aria-controls="myconfig">
+            My Saved Config
+            <span class="badge bg-danger rounded-pill">{{msc|length}}</span>
+
+        </a>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#mysite"
+            aria-expanded="false" aria-controls="mysite">
+            Taged outdoor Site
+            <span class="badge bg-danger rounded-pill">{{cell|length}}</span>
+
+        </button>
+    </p>
+
+    <div class="collapse" id="myconfig">
+        <div class="card card-body">
+            <ul class="list-group">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 text-danger">
+                        External Antenna properties
+                        <span class="badge bg-danger rounded-pill">{{msc|length}}</span>
+                    </h5>
+                </div>
+                {% for k,value in msc.items %}
+                <li class="list-group-item list-group-item-dark">
+                    <strong>{{k}} : </strong> {{value}}
+                </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="collapse" id="mysite">
+        <div class="card card-body">
+            <ul class="list-group">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1 text-danger">
+                        Taged outdoor Site Properties
+                        <span class="badge bg-danger rounded-pill">{{cell|length}}</span>
+                    </h5>
+                </div>
+                {% for k,value in cell.items %}
+                <li class="list-group-item list-group-item-dark">
+                    <strong>{{k}} : </strong> {{value}}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+
+    {% block content %}
+
+    {% endblock content %}
+
+
 
 
 
@@ -193,13 +259,13 @@ $(".loader").fadeOut("1000"); })
 
 
 
-   {% block mapScript %}
-        
-        {% endblock mapScript %}
+{% block mapScript %}
+
+{% endblock mapScript %}
 
 
-           
-                <script>
-            </script> 
-            
+
+<script>
+</script>
+
 </html>

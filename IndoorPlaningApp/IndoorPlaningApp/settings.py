@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-p^$+*(j8)!md&vzqf3dob%ncgy9!(@iqm^kv-w7v@ddbh*i-k1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.100.31','127.0.0.1',]
+ALLOWED_HOSTS = ['192.168.100.31','127.0.0.1','192.168.43.199',]
 
 
 # Application definition
@@ -125,3 +125,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL='login'
+
+MEDIA_URL = '/media/maps/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/maps/')
